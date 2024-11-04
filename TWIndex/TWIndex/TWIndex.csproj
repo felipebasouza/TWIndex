@@ -9,7 +9,7 @@
     <PackageReference Include="Microcharts" Version="0.8.5-pre" />
     <PackageReference Include="Microcharts.Forms" Version="0.8.5-pre" />
     <PackageReference Include="MVVMCoffee" Version="1.1.0" />
-    <PackageReference Include="refit" Version="5.1.67" />
+    <PackageReference Include="refit" Version="8.0.0" />
     <PackageReference Include="Xamarin.Forms" Version="4.7.0.1080" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
     <PackageReference Include="Xamarin.Forms.Visual.Material" Version="4.7.0.1080" />
