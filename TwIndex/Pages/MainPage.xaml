@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:mi="http://www.aathifmahir.com/dotnet/2022/maui/icons"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TwIndex.Pages.MainPage"
+             Shell.NavBarIsVisible="True">
+
+    <Shell.TitleView>
+        <Grid Padding="30,0" ColumnSpacing="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0"
+                   Text="TW-Index" 
+                   FontSize="20" 
+                   TextColor="White"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Start" />
+            <ImageButton Grid.Column="1"
+                 HeightRequest="28" 
+                 WidthRequest="28"
+                 mi:MauiIcon.Value="{mi:Material Icon=InfoOutline}"
+                 BackgroundColor="#5e35b1"
+                 CornerRadius="14"
+                 Clicked="OnInfoClicked"
+                 VerticalOptions="Center"
+                 HorizontalOptions="End" />
+
+        </Grid>
+    </Shell.TitleView>
+
+    <ScrollView>
+        <VerticalStackLayout BackgroundColor="White" Spacing="0">
+
+            <!-- Seção de Apresentação -->
+            <VerticalStackLayout Padding="20" Spacing="15">
+                <Label TextColor="Black" 
+                       HorizontalTextAlignment="Center" 
+                       FontSize="24" 
+                       FontAttributes="Bold"
+                       Text="Conheça o TW-Index" />
+
+                <BoxView Margin="0,5" 
+                         Color="Gray" 
+                         HeightRequest="1" 
+                         WidthRequest="100"
+                         HorizontalOptions="Center" />
+
+                <Label FontSize="16" 
+                       TextColor="#333333"
+                       HorizontalTextAlignment="Start" 
+                       LineHeight="1.4"
+                       Text="TW-Index App é uma ferramenta gratuita, desenvolvida na Universidade Federal de Sergipe e baseada no Google Trends que permite acompanhar a evolução do número de buscas no Google por uma determinada palavra-chave ao longo do tempo." />
+            </VerticalStackLayout>
+
+            <!-- Seção de Busca -->
+            <VerticalStackLayout Padding="20" Spacing="20">
+                <VerticalStackLayout Spacing="10">
+                    <Label HorizontalTextAlignment="Center" 
+                           FontSize="24" 
+                           FontAttributes="Bold"
+                           TextColor="Black" 
+                           Text="Iniciar Busca" />
+
+                    <BoxView Color="Gray" 
+                             HeightRequest="1" 
+                             WidthRequest="100"
+                             HorizontalOptions="Center" />
+                </VerticalStackLayout>
+
+                <Label TextColor="Black" 
+                       Text="Qual o Contexto da Busca?" 
+                       HorizontalTextAlignment="Center" 
+                       FontSize="18"
+                       FontAttributes="Bold" />
+
+                <HorizontalStackLayout Spacing="30" 
+                                      HorizontalOptions="Center"
+                                      Margin="10">
+                    <RadioButton x:Name="radioAcademico"
+                                 FontSize="16" 
+                                 Content="Acadêmico"
+                                 GroupName="Contexto"
+                                 CheckedChanged="OnRadioButtonCheckedChanged" />
+
+                    <RadioButton x:Name="radioEmpresarial"
+                                 FontSize="16" 
+                                 Content="Empresarial"
+                                 GroupName="Contexto"
+                                 CheckedChanged="OnRadioButtonCheckedChanged" />
+                </HorizontalStackLayout>
+
+                <Button x:Name="buttonNext" 
+                        IsEnabled="False" 
+                        Clicked="OnNextClicked"  
+                        Margin="40,20,40,20" 
+                        BackgroundColor="#280680" 
+                        TextColor="White" 
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        CornerRadius="8"
+                        HeightRequest="50"
+                        Text="Avançar" />
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

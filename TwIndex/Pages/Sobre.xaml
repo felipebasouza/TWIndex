@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TwIndex.Pages.Sobre"
+             Title="Sobre">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <!-- Título -->
+            <VerticalStackLayout Spacing="10">
+                <Label FontSize="24" 
+                       FontAttributes="Bold"
+                       TextColor="Black" 
+                       HorizontalTextAlignment="Center"
+                       Text="Desenvolvimento do App" />
+
+                <BoxView Margin="0,5" 
+                         Color="Gray" 
+                         HeightRequest="1" 
+                         WidthRequest="100"
+                         HorizontalOptions="Center" />
+            </VerticalStackLayout>
+
+            <!-- Descrição -->
+            <Label FontSize="16"
+                   TextColor="#333333"
+                   LineHeight="1.4"
+                   HorizontalTextAlignment="Start"
+                   Text="O TW-Index foi desenvolvido dentro Programa Institucional de Bolsas de Iniciação em Desenvolvimento Tecnológico e Inovação (PIBITI) da Universidade Federal de Sergipe pelo aluno do curso de Ciência da Computação, Felipe Barbosa Souza com orientação do Professor Dr. Edward David Moreno Ordoñez." />
+
+            <!-- Logos -->
+            <FlexLayout Margin="0,30,0,0" 
+                       MinimumHeightRequest="200"
+                       Direction="Row" 
+                       JustifyContent="SpaceAround" 
+                       AlignItems="Center"
+                       Wrap="Wrap">
+
+                <Image WidthRequest="190"
+                       HeightRequest="120"
+                       Aspect="AspectFit"
+                       Margin="10"
+                       Source="logoUFS.png" />
+
+                <Image WidthRequest="190"
+                       HeightRequest="120"
+                       Aspect="AspectFit"
+                       Margin="10"
+                       Source="logoCintecc.png" />
+
+                <Image WidthRequest="120"
+                       HeightRequest="120"
+                       Aspect="AspectFit"
+                       Margin="10"
+                       Source="logoDcomp.png" />
+            </FlexLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
