@@ -53,13 +53,7 @@ public partial class FormPalavrasPage : ContentPage
 
         var palavras = ViewModel.GetPalavras();
 
-        // TODO: Quando ResultadoPage estiver pronta:
-        // await Navigation.PushAsync(new ResultadoPage(palavras));
-
-        // Temporário para testar:
-        await DisplayAlert(
-            "Sucesso!",
-            $"Palavras validadas:\n{string.Join("\n", palavras)}",
-            "OK");
+        // Navega para ResultadoPage
+        await Navigation.PushAsync(new ResultadoPage(palavras));
     }
 }

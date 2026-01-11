@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TwIndex.Pages.ResultadoPage"
+             Title="ResultadoPage">
+    <Grid>
+        <!-- Loading Indicator -->
+        <ActivityIndicator IsRunning="{Binding IsBusy}"
+                          IsVisible="{Binding IsBusy}" 
+                          Color="Red"
+                          VerticalOptions="Center"
+                          HorizontalOptions="Center" />
+
+        <!-- Conteúdo Principal -->
+        <ScrollView IsVisible="{Binding Show}">
+            <VerticalStackLayout BackgroundColor="White" Spacing="10">
+
+                <!-- Cabeçalho -->
+                <VerticalStackLayout HorizontalOptions="Center" 
+                                    Margin="0,20" 
+                                    Padding="30,0" 
+                                    BackgroundColor="White"
+                                    Spacing="10">
+                    <Label HorizontalTextAlignment="Center" 
+                           FontAttributes="Bold" 
+                           FontSize="18" 
+                           TextColor="Black" 
+                           Text="Índice ITW" />
+
+                    <Label FontSize="12" 
+                           TextColor="#666666"
+                           Text="Os números representam o interesse de pesquisa relativo ao média do último ano. Um valor de 100 representa o pico de popularidade de uma palavra-chave. Um valor de 50 significa que a palavra-chave teve metade da popularidade. Uma pontuação de 0 significa que não havia dados suficientes sobre a palavra-chave." />
+                </VerticalStackLayout>
+
+                <!-- Card do Conjunto -->
+                <Frame Margin="10" 
+                       BorderColor="LightGray" 
+                       HasShadow="True" 
+                       CornerRadius="8" 
+                       Padding="15">
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Conjunto de Palavras-Chave" 
+                               FontSize="12" 
+                               TextColor="#666666" />
+
+                        <Label Text="Desempenho Geral" 
+                               FontAttributes="Bold" 
+                               FontSize="18" 
+                               TextColor="Black" />
+
+                        <BoxView Color="Gray" 
+                                HeightRequest="2" 
+                                WidthRequest="80" />
+
+                        <Label Text="ITW Médio" 
+                               FontSize="12" 
+                               TextColor="#666666" />
+
+                        <Label TextColor="Black" 
+                               FontSize="18" 
+                               FontAttributes="Bold"  
+                               Text="{Binding Resultado.DesempenhoAnualConjunto, StringFormat='{0:F2}'}" />
+
+                        <Button Command="{Binding PushAsyncGraficoConjuntoCommand}" 
+                                BackgroundColor="White" 
+                                BorderWidth="2" 
+                                CornerRadius="25" 
+                                FontSize="12" 
+                                Padding="20,8"
+                                WidthRequest="120"
+                                HorizontalOptions="Start"
+                                TextColor="#280680" 
+                                Text="Ver Gráfico" />
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Lista de Palavras -->
+                <CollectionView ItemsSource="{Binding Resultado.DesempenhoAnualPalavra}"
+                               Margin="10,0">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame BorderColor="LightGray" 
+                                   HasShadow="True" 
+                                   CornerRadius="8" 
+                                   Padding="15"
+                                   Margin="0,5">
+                                <VerticalStackLayout Spacing="8">
+                                    <Label Text="Palavra-Chave" 
+                                           FontSize="12" 
+                                           TextColor="#666666" />
+
+                                    <Label TextColor="Black" 
+                                           FontAttributes="Bold" 
+                                           FontSize="18" 
+                                           Text="{Binding Key}" />
+
+                                    <BoxView Color="Gray" 
+                                            HeightRequest="2" 
+                                            WidthRequest="80" />
+
+                                    <Label Text="ITW" 
+                                           FontSize="12" 
+                                           TextColor="#666666" />
+
+                                    <Label TextColor="Black" 
+                                           FontSize="18" 
+                                           FontAttributes="Bold"  
+                                           Text="{Binding Value, StringFormat='{0:F2}'}" />
+
+                                    <Button Command="{Binding Source={x:Reference page}, Path=BindingContext.PushAsyncGraficoPalavraCommand}" 
+                                            CommandParameter="{Binding Key}"
+                                            BackgroundColor="White" 
+                                            BorderWidth="2" 
+                                            CornerRadius="25" 
+                                            FontSize="12" 
+                                            Padding="20,8"
+                                            WidthRequest="130"
+                                            HorizontalOptions="End"
+                                            TextColor="#280680" 
+                                            Text="Ver Gráfico" />
+                                </VerticalStackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Mensagem de Erro -->
+        <VerticalStackLayout IsVisible="{Binding HasError}"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center"
+                            Spacing="20"
+                            Padding="20">
+            <Label HorizontalTextAlignment="Center" 
+                   Text="Hmm. Estamos tendo problemas com a conexão." 
+                   FontAttributes="Bold" 
+                   FontSize="22" 
+                   TextColor="Black" />
+
+            <Image WidthRequest="250" 
+                   HeightRequest="280" 
+                   Source="serverdown.png" 
+                   Aspect="AspectFit" />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>
