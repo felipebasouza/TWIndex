@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TwIndex.Pages.FormPalavrasPage"
+             Title="Inserir Termos de Busca">
+    <ScrollView>
+        <VerticalStackLayout Spacing="0">
+            <VerticalStackLayout x:Name="Panel" 
+                                Margin="15" 
+                                Spacing="15" />
+
+            <Button x:Name="btnAvancar"
+                    BackgroundColor="#280680" 
+                    Margin="40,20,40,20" 
+                    Clicked="OnAvancarClicked"
+                    TextColor="White" 
+                    FontSize="16"
+                    FontAttributes="Bold"
+                    CornerRadius="8"
+                    HeightRequest="50"
+                    Text="Avançar" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

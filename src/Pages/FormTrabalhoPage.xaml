@@ -51,8 +51,9 @@
                          HorizontalOptions="Center" />
             </VerticalStackLayout>
 
-            <Button Margin="40,20,40,20" 
-                    Command="{Binding ConfirmarCommand}" 
+            <Button x:Name="btnAvancar"
+                    Margin="40,20,40,20" 
+                    Clicked="OnAvancarClicked" 
                     BackgroundColor="#280680" 
                     TextColor="White" 
                     FontSize="16"

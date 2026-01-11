@@ -38,13 +38,7 @@ public partial class FormEmpresaPage : ContentPage
 
         int quantidadePalavras = (int)ViewModel.ValorStepper;
 
-        // TODO: Quando FormPalavrasPage estiver pronta:
-        // await Navigation.PushAsync(new FormPalavrasPage(quantidadePalavras));
+        await Navigation.PushAsync(new FormPalavrasPage(quantidadePalavras));
 
-        // Temporário para testar:
-        await DisplayAlert(
-            "Sucesso!",
-            $"Empresa validada!\nSegmento: {ViewModel.Segmento}\nNome: {ViewModel.Nome}\nPalavras: {quantidadePalavras}",
-            "OK");
     }
 }
