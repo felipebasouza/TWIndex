@@ -5,9 +5,9 @@ namespace TwIndex.ViewModels
 {
 
 
-    public partial class FormPalavrasViewModel : ObservableObject
+    public partial class FormPalavrasViewModel(int quantidadePalavras) : ObservableObject
     {
-        public int QuantidadePalavras { get; set; }
+        public int QuantidadePalavras { get; set; } = quantidadePalavras;
 
         [ObservableProperty]
         private string palavra1 = string.Empty;
@@ -23,11 +23,6 @@ namespace TwIndex.ViewModels
 
         [ObservableProperty]
         private string palavra5 = string.Empty;
-
-        public FormPalavrasViewModel(int quantidadePalavras)
-        {
-            QuantidadePalavras = quantidadePalavras;
-        }
 
         public bool IsValid()
         {

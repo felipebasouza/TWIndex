@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using Refit;
 using TwIndex.Models;
+using TwIndex.Pages;
 using TwIndex.Services;
 
 namespace TwIndex.ViewModels
@@ -29,7 +30,7 @@ namespace TwIndex.ViewModels
         public ResultadoViewModel(List<string> palavras)
         {
             // Filtra palavras vazias
-            _palavras = palavras.Where(p => !string.IsNullOrWhiteSpace(p)).ToList();
+            _palavras = [.. palavras.Where(p => !string.IsNullOrWhiteSpace(p))];
 
             // Inicia a consulta
             _ = ConsultaPytrendsAsync();
@@ -101,7 +102,7 @@ namespace TwIndex.ViewModels
         }
 
         [RelayCommand]
-        private async Task Voltar()
+        private static async Task Voltar()
         {
             await Shell.Current.GoToAsync("..");
         }

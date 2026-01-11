@@ -4,7 +4,7 @@ using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Painting;
 using SkiaSharp;
 using System.Collections.ObjectModel;
-    using TwIndex.Models;
+using TwIndex.Models;
 
 namespace TwIndex.ViewModels;
 
@@ -16,14 +16,14 @@ public partial class GraficoViewModel : ObservableObject, IQueryAttributable
     [ObservableProperty]
     private string subtitulo = string.Empty;
 
-    private ObservableCollection<ISeries> _series;
+    private ObservableCollection<ISeries> _series = [];
     public ObservableCollection<ISeries> Series
     {
         get => _series;
         set => SetProperty(ref _series, value);
     }
 
-    private ObservableCollection<Axis> _xAxes;
+    private ObservableCollection<Axis> _xAxes = [];
     public ObservableCollection<Axis> XAxes
     {
         get => _xAxes;
@@ -37,14 +37,14 @@ public partial class GraficoViewModel : ObservableObject, IQueryAttributable
     // Implementação do IQueryAttributable para receber parâmetros via Shell Navigation
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
-        if (query.ContainsKey("Resultado"))
+        if (query.TryGetValue("Resultado", out object? value))
         {
-            _resultado = query["Resultado"] as Resultado;
+            _resultado = value as Resultado;
         }
 
-        if (query.ContainsKey("Palavra"))
+        if (query.TryGetValue("Palavra", out object? value1))
         {
-            _palavraChave = query["Palavra"] as string;
+            _palavraChave = value1 as string;
         }
 
         // Inicializa o gráfico com base nos parâmetros recebidos
@@ -95,8 +95,8 @@ public partial class GraficoViewModel : ObservableObject, IQueryAttributable
         var labels = mesesOrdenados.ToArray();
 
         // Cria a série de linha
-        Series = new ObservableCollection<ISeries>
-        {
+        Series =
+        [
             new LineSeries<double>
             {
                 Values = valores,
@@ -108,22 +108,21 @@ public partial class GraficoViewModel : ObservableObject, IQueryAttributable
                 GeometryFill = new SolidColorPaint(SKColors.White),
                 LineSmoothness = 0 // 0 = linha reta, 1 = linha suave
             }
-        };
+        ];
 
         // Configura o eixo X com os labels dos meses
-        XAxes = new ObservableCollection<Axis>
-        {
-            new Axis
-            {
+        XAxes =
+        [
+            new() {
                 Labels = labels,
                 LabelsRotation = 45,
                 TextSize = 12,
                 SeparatorsPaint = new SolidColorPaint(SKColors.LightGray) { StrokeThickness = 1 }
             }
-        };
+        ];
     }
 
-    private List<string> OrdenarMesesUltimoAno(Dictionary<string, float> dados)
+    private static List<string> OrdenarMesesUltimoAno(Dictionary<string, float> dados)
     {
         // Mapeamento de nomes completos para abreviações
         var mesesMap = new Dictionary<string, string>
@@ -169,7 +168,7 @@ public partial class GraficoViewModel : ObservableObject, IQueryAttributable
         return resultado;
     }
 
-    private string ObterNomeMes(int mes)
+    private static string ObterNomeMes(int mes)
     {
         return mes switch
         {
