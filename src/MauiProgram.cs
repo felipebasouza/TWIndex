@@ -1,5 +1,4 @@
 ﻿using LiveChartsCore.SkiaSharpView.Maui;
-using MauiIcons.Material;
 using Microsoft.Extensions.Logging;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 using TwIndex.Pages;
@@ -14,7 +13,6 @@ namespace TwIndex
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
-                .UseMaterialMauiIcons()
                 .UseLiveCharts()
                 .UseSkiaSharp()
                 .ConfigureFonts(fonts =>
