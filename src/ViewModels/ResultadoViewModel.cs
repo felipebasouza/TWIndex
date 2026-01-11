@@ -43,9 +43,14 @@ public partial class ResultadoViewModel : ObservableObject
 
         try
         {
-            var pytrends = RestService.For<IRestApi>(EndPoints.BaseUrl);
-            var response = await pytrends.Request(_palavras);
-            Resultado = response;
+            await Task.Delay(2000); // Simula tempo de requisição
+
+            //var pytrends = RestService.For<IRestApi>(EndPoints.BaseUrl);
+            //var response = await pytrends.Request(_palavras);
+            //Resultado = response;
+
+            Resultado = ResultadoSimulator.CriarResultadoSimulado(_palavras);
+
             Show = true;
         }
         catch (Exception)
