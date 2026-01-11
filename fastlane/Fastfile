@@ -1,0 +1,60 @@
+default_platform(:android)
+platform :android do
+
+  # =========================
+  # Helper para localizar APK
+  # =========================
+  def apk_path(output_dir = "output")
+    apk = Dir["#{output_dir}/**/*.apk"].first
+    if apk.nil? || !File.exist?(apk)
+      UI.user_error!("❌ Nenhum APK encontrado em #{output_dir}")
+    end
+    apk
+  end
+
+  # ========================================
+  # Lane que apenas assina o APK
+  # ========================================
+  desc "Assina APK gerado pelo dotnet publish"
+  lane :signed do |options|
+    output_dir = options[:output_dir] || "output"
+
+    apk = apk_path(output_dir)
+    UI.message("📦 APK encontrado: #{apk}")
+
+    keystore_path = ENV["KEYSTORE_PATH"]
+    unless File.exist?(keystore_path)
+      UI.user_error!("❌ Keystore não encontrado: #{keystore_path}")
+    end
+    UI.message("🔑 Usando keystore: #{keystore_path}")
+
+    sh("apksigner sign --ks #{keystore_path} --ks-pass pass:#{ENV['KEYSTORE_PASSWORD']} --key-pass pass:#{ENV['KEY_PASSWORD']} #{apk}")
+
+    UI.message("✅ APK assinado: #{apk}")
+  end
+
+  # ========================================
+  # Lane que distribui via Firebase
+  # ========================================
+  desc "Distribuir APK assinado via Firebase App Distribution (beta)"
+  lane :firebase do |options|
+    output_dir = options[:output_dir] || "output"
+
+    apk = apk_path(output_dir)
+    UI.message("📦 APK encontrado para distribuição: #{apk}")
+
+    credentials_path = File.expand_path("firebase-credentials.json")
+    unless File.exist?(credentials_path)
+      UI.user_error!("❌ Arquivo de credenciais não encontrado: #{credentials_path}")
+    end
+    UI.message("🔑 Credenciais encontradas: #{credentials_path}")
+
+    firebase_app_distribution(
+      app: ENV["FIREBASE_APP_ID"],
+      testers: ENV["FIREBASE_TESTERS"],
+      release_notes: options[:release_notes] || "Build beta automático via GitHub Actions",
+      service_credentials_file: credentials_path,
+      apk_path: File.expand_path(apk)
+    )
+  end
+end
