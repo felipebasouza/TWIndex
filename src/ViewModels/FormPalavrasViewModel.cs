@@ -23,6 +23,20 @@ namespace TwIndex.ViewModels
 
         [ObservableProperty]
         private string palavra5 = string.Empty;
+            
+        [ObservableProperty]
+        private bool isFormValid;
+
+        partial void OnPalavra1Changed(string value) => UpdateIsFormValid();
+        partial void OnPalavra2Changed(string value) => UpdateIsFormValid();
+        partial void OnPalavra3Changed(string value) => UpdateIsFormValid();
+        partial void OnPalavra4Changed(string value) => UpdateIsFormValid();
+        partial void OnPalavra5Changed(string value) => UpdateIsFormValid();
+
+        private void UpdateIsFormValid()
+        {
+            IsFormValid = IsValid();
+        }
 
         public bool IsValid()
         {

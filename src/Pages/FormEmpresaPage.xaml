@@ -6,22 +6,22 @@
     <ScrollView>
         <VerticalStackLayout Margin="15" Spacing="15">
 
-            <Entry Text="{Binding Segmento}" 
+            <Entry Text="{Binding Segmento, Mode=TwoWay}" 
                    Placeholder="Segmento de Mercado" 
                    Keyboard="Text"
                    PlaceholderColor="Gray" />
 
-            <Entry Text="{Binding Nome}" 
+            <Entry Text="{Binding Nome, Mode=TwoWay}" 
                    Placeholder="Insira seu Nome" 
                    Keyboard="Text"
                    PlaceholderColor="Gray" />
 
-            <Entry Text="{Binding Cidade}" 
+            <Entry Text="{Binding Cidade, Mode=TwoWay}" 
                    Placeholder="Insira sua Cidade" 
                    Keyboard="Text"
                    PlaceholderColor="Gray" />
 
-            <Entry Text="{Binding Estado}" 
+            <Entry Text="{Binding Estado, Mode=TwoWay}" 
                    Placeholder="Insira seu Estado" 
                    Keyboard="Text"
                    PlaceholderColor="Gray" />
@@ -60,7 +60,16 @@
                     FontAttributes="Bold"
                     CornerRadius="8"
                     HeightRequest="50"
-                    Text="Avançar" />
+                    Text="Avançar"
+                    IsEnabled="{Binding IsFormValid}">
+                <Button.Triggers>
+                    <DataTrigger TargetType="Button" 
+                                 Binding="{Binding IsFormValid}" 
+                                 Value="False">
+                        <Setter Property="Opacity" Value="0.5" />
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
 
         </VerticalStackLayout>
     </ScrollView>

@@ -18,7 +18,16 @@
                     FontAttributes="Bold"
                     CornerRadius="8"
                     HeightRequest="50"
-                    Text="Avançar" />
+                    Text="Avançar"
+                    IsEnabled="{Binding IsFormValid}">
+                <Button.Triggers>
+                    <DataTrigger TargetType="Button" 
+                                 Binding="{Binding IsFormValid}" 
+                                 Value="False">
+                        <Setter Property="Opacity" Value="0.5" />
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

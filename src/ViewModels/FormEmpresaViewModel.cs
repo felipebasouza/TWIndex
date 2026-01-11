@@ -19,6 +19,17 @@ namespace TwIndex.ViewModels
         [ObservableProperty]
         private double valorStepper = 4;
 
+        [ObservableProperty]
+        private bool isFormValid;
+
+        partial void OnSegmentoChanged(string value) => UpdateIsFormValid();
+        partial void OnNomeChanged(string value) => UpdateIsFormValid();
+
+        private void UpdateIsFormValid()
+        {
+            IsFormValid = IsValid();
+        }
+
         public bool IsValid()
         {
             return !string.IsNullOrWhiteSpace(Segmento) &&
