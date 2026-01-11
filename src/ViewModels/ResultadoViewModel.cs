@@ -52,14 +52,11 @@ namespace TwIndex.ViewModels
             {
                 HasError = true;
                 ErrorMessage = "Erro de Conexão, tente novamente mais tarde!";
-
-                // Notifica a View sobre o erro
-                if (Application.Current?.MainPage != null)
+                Show = false;
+            }
+            finally
                 {
-                    await Application.Current.MainPage.DisplayAlert(
-                        "Falha na Conexão",
-                        ErrorMessage,
-                        "OK");
+                IsBusy = false;
                 }
             }
             finally
@@ -95,6 +92,18 @@ namespace TwIndex.ViewModels
                 
                 await Shell.Current.GoToAsync(nameof(GraficoPage), navigationParameter);
             }
+        }
+
+        [RelayCommand]
+        private async Task TentarNovamente()
+        {
+            await ConsultaPytrendsAsync();
+        }
+
+        [RelayCommand]
+        private async Task Voltar()
+        {
+            await Shell.Current.GoToAsync("..");
         }
     }
 }

@@ -8,7 +8,7 @@
         <!-- Loading Indicator -->
         <ActivityIndicator IsRunning="{Binding IsBusy}"
                           IsVisible="{Binding IsBusy}" 
-                          Color="Red"
+                          Color="{DynamicResource PrimaryColor}"
                           VerticalOptions="Center"
                           HorizontalOptions="Center" />
 
@@ -135,21 +135,41 @@
         </ScrollView>
 
         <!-- Mensagem de Erro -->
-        <VerticalStackLayout IsVisible="{Binding HasError}"
-                            VerticalOptions="Center"
-                            HorizontalOptions="Center"
-                            Spacing="20"
-                            Padding="20">
-            <Label HorizontalTextAlignment="Center" 
-                   Text="Hmm. Estamos tendo problemas com a conexão." 
-                   FontAttributes="Bold" 
-                   FontSize="22" 
-                   TextColor="Black" />
-
-            <Image WidthRequest="250" 
-                   HeightRequest="280" 
-                   Source="serverdown.png" 
-                   Aspect="AspectFit" />
+        <VerticalStackLayout IsVisible="{Binding HasError}" 
+                             Spacing="24" 
+                             Padding="32"
+                             VerticalOptions="Center"
+                             HorizontalOptions="Center">
+            
+            <Image Source="error_connection.png" 
+                   HeightRequest="120"
+                   Aspect="AspectFit"
+                   Opacity="0.7"/>
+            
+            <Label Text="{Binding ErrorMessage}"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center"
+                   TextColor="{DynamicResource DangerColor}"/>
+            
+            <Label Text="Verifique sua conexão com a internet e tente novamente."
+                   FontSize="14"
+                   HorizontalTextAlignment="Center"
+                   TextColor="{DynamicResource Gray600}"
+                   Margin="0,0,0,16"/>
+            
+            <Button Text="Tentar Novamente"
+                    Command="{Binding TentarNovamenteCommand}"
+                    WidthRequest="200"
+                    BackgroundColor="{DynamicResource PrimaryColor}"/>
+            
+            <Button Text="Voltar"
+                    Command="{Binding VoltarCommand}"
+                    WidthRequest="200"
+                    BackgroundColor="Transparent"
+                    TextColor="{DynamicResource PrimaryColor}"
+                    BorderColor="{DynamicResource PrimaryColor}"
+                    BorderWidth="1"/>
         </VerticalStackLayout>
     </Grid>
 </ContentPage>
