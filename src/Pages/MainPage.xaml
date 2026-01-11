@@ -17,15 +17,24 @@
                    TextColor="White"
                    VerticalOptions="Center"
                    HorizontalOptions="Start" />
+            
             <ImageButton Grid.Column="1"
-                 HeightRequest="28" 
-                 WidthRequest="28"
-                 mi:MauiIcon.Value="{mi:Material Icon=InfoOutline}"
-                 BackgroundColor="#5e35b1"
-                 CornerRadius="14"
-                 Clicked="OnInfoClicked"
-                 VerticalOptions="Center"
-                 HorizontalOptions="End" />
+                         HeightRequest="34" 
+                         WidthRequest="34"
+                         mi:MauiIcon.Value="{mi:Material Icon=Info}"
+                         BackgroundColor="#5e35b1"
+                         CornerRadius="17"
+                         Padding="7"
+                         Clicked="OnInfoClicked"
+                         VerticalOptions="Center"
+                         HorizontalOptions="End">
+                <ImageButton.Shadow>
+                    <Shadow Brush="Black"
+                            Offset="0,2"
+                            Radius="4"
+                            Opacity="0.3" />
+                </ImageButton.Shadow>
+            </ImageButton>
 
         </Grid>
     </Shell.TitleView>
@@ -51,7 +60,7 @@
                        TextColor="#333333"
                        HorizontalTextAlignment="Start" 
                        LineHeight="1.4"
-                       Text="TW-Index App é uma ferramenta gratuita, desenvolvida na Universidade Federal de Sergipe e baseada no Google Trends que permite acompanhar a evolução do número de buscas no Google por uma determinada palavra-chave ao longo do tempo." />
+                       Text="O TW-Index App é uma ferramenta gratuita da Universidade Federal de Sergipe que permite acompanhar a evolução do interesse por uma palavra-chave ao longo do tempo." />
             </VerticalStackLayout>
 
             <!-- Seção de Busca -->

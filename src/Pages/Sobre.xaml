@@ -27,7 +27,7 @@
                    TextColor="#333333"
                    LineHeight="1.4"
                    HorizontalTextAlignment="Start"
-                   Text="O TW-Index foi desenvolvido dentro Programa Institucional de Bolsas de Iniciação em Desenvolvimento Tecnológico e Inovação (PIBITI) da Universidade Federal de Sergipe pelo aluno do curso de Ciência da Computação, Felipe Barbosa Souza com orientação do Professor Dr. Edward David Moreno Ordoñez." />
+                   Text="O TW-Index foi desenvolvido em 2020 no âmbito do Programa Institucional de Bolsas de Iniciação em Desenvolvimento Tecnológico e Inovação (PIBITI) da Universidade Federal de Sergipe, pelo aluno do curso de Sistemas de Informação Felipe Barbosa Souza, sob orientação do professor Dr. Edward David Moreno Ordoñez." />
 
             <!-- Logos -->
             <FlexLayout Margin="0,30,0,0" 
