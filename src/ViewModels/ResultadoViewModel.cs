@@ -73,11 +73,12 @@ namespace TwIndex.ViewModels
         {
             if (Resultado != null)
             {
-                // TODO: Implementar navegação para GraficoPage
-                await Application.Current!.MainPage!.DisplayAlert(
-                    "Gráfico Conjunto",
-                    $"ITW Médio: {Resultado.DesempenhoAnualConjunto:F2}",
-                    "OK");
+                var navigationParameter = new Dictionary<string, object>
+                {
+                    { "Resultado", Resultado }
+                };
+                
+                await Shell.Current.GoToAsync(nameof(GraficoPage), navigationParameter);
             }
         }
 
@@ -86,12 +87,13 @@ namespace TwIndex.ViewModels
         {
             if (Resultado != null && !string.IsNullOrEmpty(palavra))
             {
-                // TODO: Implementar navegação para GraficoPage
-                var valor = Resultado.DesempenhoAnualPalavra.GetValueOrDefault(palavra, 0);
-                await Application.Current!.MainPage!.DisplayAlert(
-                    "Gráfico Palavra",
-                    $"Palavra: {palavra}\nITW: {valor:F2}",
-                    "OK");
+                var navigationParameter = new Dictionary<string, object>
+                {
+                    { "Resultado", Resultado },
+                    { "Palavra", palavra }
+                };
+                
+                await Shell.Current.GoToAsync(nameof(GraficoPage), navigationParameter);
             }
         }
     }

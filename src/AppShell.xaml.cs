@@ -1,10 +1,14 @@
-﻿namespace TwIndex
+﻿using TwIndex.Pages;
+
+namespace TwIndex;
+
+public partial class AppShell : Shell
 {
-    public partial class AppShell : Shell
+    public AppShell()
     {
-        public AppShell()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+        
+        // Registra a rota para navegação
+        Routing.RegisterRoute(nameof(Pages.GraficoPage), typeof(Pages.GraficoPage));
     }
 }
