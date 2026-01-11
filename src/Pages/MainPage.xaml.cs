@@ -8,11 +8,13 @@
         public MainPage()
         {
             InitializeComponent();
+            
+            buttonNext.IsEnabled = false;
         }
 
         private void OnRadioButtonCheckedChanged(object sender, CheckedChangedEventArgs e)
         {
-            if (!e.Value) return; // Só processa quando é marcado, não desmarcado
+            if (!e.Value) return;
 
             var radioButton = sender as RadioButton;
             var content = radioButton?.Content?.ToString();
@@ -40,7 +42,6 @@
             else if (_isBusiness)
             {
                 await Navigation.PushAsync(new FormEmpresaPage());
-
             }
         }
 
