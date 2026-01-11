@@ -1,1 +1,72 @@
+name: TW-Index .NET MAUI Android
+on:
+  push:
+    branches: [ "master" ]
+  workflow_dispatch:
 
+jobs:
+  build-android:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+        
+      - name: Configurar .NET
+        uses: actions/setup-dotnet@v5
+        with:
+         dotnet-version: '10.x.x'
+          
+      - name: Instalar workload MAUI Android
+        run: dotnet workload restore
+        
+      - name: Restaurar dependências Android
+        run: dotnet restore src/TwIndex.csproj -p:TargetFramework=net10.0-android
+        
+      - name: Compilar projeto Android
+        run: dotnet publish src/TwIndex.csproj -f net10.0-android -c Release -o ./fastlane/output
+        
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+          
+      - name: Instalar Fastlane e dependências
+        working-directory: fastlane
+        run: bundle install
+        
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v2
+        with:
+          api-level: 33
+          build-tools: 34.0.0
+          cache: true
+
+      - name: Criar arquivo de credenciais do Service Account
+        working-directory: fastlane
+        run: |
+            echo '${{ secrets.FIREBASE_CREDENTIALS_BASE64 }}' | base64 -d > firebase-credentials.json
+
+      - name: Criar keystore
+        working-directory: fastlane
+        run: |
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > gen-keystore.jks
+
+      - name: Assinar APK
+        working-directory: fastlane
+        run: |
+            # Adiciona build-tools ao PATH para encontrar apksigner
+            export PATH=$ANDROID_HOME/build-tools/34.0.0:$PATH
+            # Roda o lane Fastlane
+            bundle exec fastlane android signed
+        env:
+          KEYSTORE_PATH: gen-keystore.jks
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+      
+      - name: Distribuir APK via Fastlane + Firebase
+        working-directory: fastlane
+        run: bundle exec fastlane android firebase
+        env:
+          FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
+          FIREBASE_TESTERS: ${{ secrets.FIREBASE_TESTERS }}
