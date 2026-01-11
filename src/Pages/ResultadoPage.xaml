@@ -34,11 +34,13 @@
                 </VerticalStackLayout>
 
                 <!-- Card do Conjunto -->
-                <Frame Margin="10" 
-                       BorderColor="LightGray" 
-                       HasShadow="True" 
-                       CornerRadius="8" 
-                       Padding="15">
+                <Border Margin="10"
+                        Stroke="LightGray"
+                        StrokeThickness="1"
+                        BackgroundColor="White"
+                        StrokeShape="RoundRectangle 8"
+                        Padding="15"
+                        Shadow="True">
                     <VerticalStackLayout Spacing="8">
                         <Label Text="Conjunto de Palavras-Chave" 
                                FontSize="12" 
@@ -75,18 +77,20 @@
                               HorizontalOptions="End"
                               Text="Ver Gráfico" /> 
                     </VerticalStackLayout>
-                </Frame>
+                </Border>
 
                 <!-- Lista de Palavras -->
                 <CollectionView ItemsSource="{Binding Resultado.DesempenhoAnualPalavra}"
                                Margin="10,0">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Frame BorderColor="LightGray" 
-                                   HasShadow="True" 
-                                   CornerRadius="8" 
-                                   Padding="15"
-                                   Margin="0,5">
+                            <Border Stroke="LightGray"
+                                    StrokeThickness="1"
+                                    BackgroundColor="White"
+                                    StrokeShape="RoundRectangle 8"
+                                    Padding="15"
+                                    Margin="0,5"
+                                    Shadow="True">
                                 <VerticalStackLayout Spacing="8">
                                     <Label Text="Palavra-Chave" 
                                            FontSize="12" 
@@ -123,7 +127,7 @@
                                             HorizontalOptions="End"
                                             Text="Ver Gráfico" />
                                 </VerticalStackLayout>
-                            </Frame>
+                            </Border>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
