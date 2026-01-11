@@ -92,7 +92,6 @@
                 </HorizontalStackLayout>
 
                 <Button x:Name="buttonNext" 
-                        IsEnabled="False" 
                         Clicked="OnNextClicked"  
                         Margin="40,20,40,20" 
                         BackgroundColor="#280680" 
@@ -101,7 +100,16 @@
                         FontAttributes="Bold"
                         CornerRadius="8"
                         HeightRequest="50"
-                        Text="Avançar" />
+                        Text="Avançar"
+                        IsEnabled="False">
+                    <Button.Triggers>
+                        <DataTrigger TargetType="Button" 
+                                     Binding="{Binding Source={x:Reference buttonNext}, Path=IsEnabled}" 
+                                     Value="False">
+                            <Setter Property="Opacity" Value="0.5" />
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
             </VerticalStackLayout>
         </VerticalStackLayout>
     </ScrollView>

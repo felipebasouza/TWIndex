@@ -6,24 +6,28 @@
     <ScrollView>
         <VerticalStackLayout Margin="15" Spacing="15">
 
-            <Entry Text="{Binding Titulo}" 
+            <Entry Text="{Binding Titulo, Mode=TwoWay}" 
                    Placeholder="Título do Trabalho"  
                    Keyboard="Text"
+                   ClearButtonVisibility="WhileEditing"
                    PlaceholderColor="Gray" />
 
-            <Entry Text="{Binding Autor}" 
+            <Entry Text="{Binding Autor, Mode=TwoWay}" 
                    Placeholder="Nome Autor" 
                    Keyboard="Text"
+                   ClearButtonVisibility="WhileEditing"
                    PlaceholderColor="Gray" />
 
-            <Entry Text="{Binding Origem}" 
+            <Entry Text="{Binding Origem, Mode=TwoWay}" 
                    Placeholder="Instituição de Origem" 
                    Keyboard="Text"
+                   ClearButtonVisibility="WhileEditing"
                    PlaceholderColor="Gray" />
 
-            <Entry Text="{Binding Departamento}" 
+            <Entry Text="{Binding Departamento, Mode=TwoWay}" 
                    Placeholder="Departamento" 
                    Keyboard="Text"
+                   ClearButtonVisibility="WhileEditing"
                    PlaceholderColor="Gray" />
 
             <VerticalStackLayout Margin="0,10" 
@@ -60,7 +64,17 @@
                     FontAttributes="Bold"
                     CornerRadius="8"
                     HeightRequest="50"
-                    Text="Avançar" />
+                    Text="Avançar"
+                    IsEnabled="{Binding IsFormValid}">
+                <Button.Triggers>
+                    <DataTrigger TargetType="Button" 
+                                 Binding="{Binding IsFormValid}" 
+                                 Value="False">
+                        <Setter Property="Opacity" Value="0.5" />
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
+
 
         </VerticalStackLayout>
     </ScrollView>

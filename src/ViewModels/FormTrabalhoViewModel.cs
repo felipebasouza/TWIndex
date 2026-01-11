@@ -22,16 +22,27 @@ public partial class FormTrabalhoViewModel : ObservableObject
     [ObservableProperty]
     private double valorStepper = 4;
 
+    [ObservableProperty]
+    private bool isFormValid;
+
     public FormTrabalhoViewModel(string tipoTrabalho)
     {
         Tipo = tipoTrabalho;
+        ValidateForm();
     }
 
-    public bool IsValid()
-    {
-        return !string.IsNullOrWhiteSpace(Titulo) &&
-               !string.IsNullOrWhiteSpace(Autor) &&
-               !string.IsNullOrWhiteSpace(Origem) &&
-               !string.IsNullOrWhiteSpace(Departamento);
-    }
+    partial void OnTituloChanged(string value) => ValidateForm();
+
+    partial void OnAutorChanged(string value) => ValidateForm();
+
+    partial void OnOrigemChanged(string value) => ValidateForm();
+
+    partial void OnDepartamentoChanged(string value) => ValidateForm();
+
+    private void ValidateForm() => IsFormValid = !string.IsNullOrWhiteSpace(Titulo) &&
+                      !string.IsNullOrWhiteSpace(Autor) &&
+                      !string.IsNullOrWhiteSpace(Origem) &&
+                      !string.IsNullOrWhiteSpace(Departamento);
+
+    public bool IsValid() => IsFormValid;
 }
