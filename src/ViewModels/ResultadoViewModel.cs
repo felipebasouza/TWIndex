@@ -5,106 +5,101 @@ using TwIndex.Models;
 using TwIndex.Pages;
 using TwIndex.Services;
 
-namespace TwIndex.ViewModels
+namespace TwIndex.ViewModels;
+
+public partial class ResultadoViewModel : ObservableObject
 {
+    [ObservableProperty]
+    private bool isBusy;
 
-    public partial class ResultadoViewModel : ObservableObject
+    [ObservableProperty]
+    private bool show;
+
+    [ObservableProperty]
+    private Resultado? resultado;
+
+    [ObservableProperty]
+    private bool hasError;
+
+    [ObservableProperty]
+    private string errorMessage = string.Empty;
+
+    private readonly List<string> _palavras;
+
+    public ResultadoViewModel(List<string> palavras)
     {
-        [ObservableProperty]
-        private bool isBusy;
+        // Filtra palavras vazias
+        _palavras = [.. palavras.Where(p => !string.IsNullOrWhiteSpace(p))];
 
-        [ObservableProperty]
-        private bool show;
+        // Inicia a consulta
+        _ = ConsultaPytrendsAsync();
+    }
 
-        [ObservableProperty]
-        private Resultado? resultado;
+    private async Task ConsultaPytrendsAsync()
+    {
+        Show = false;
+        IsBusy = true;
+        HasError = false;
 
-        [ObservableProperty]
-        private bool hasError;
-
-        [ObservableProperty]
-        private string errorMessage = string.Empty;
-
-        private readonly List<string> _palavras;
-
-        public ResultadoViewModel(List<string> palavras)
+        try
         {
-            // Filtra palavras vazias
-            _palavras = [.. palavras.Where(p => !string.IsNullOrWhiteSpace(p))];
-
-            // Inicia a consulta
-            _ = ConsultaPytrendsAsync();
+            var pytrends = RestService.For<IRestApi>(EndPoints.BaseUrl);
+            var response = await pytrends.Request(_palavras);
+            Resultado = response;
+            Show = true;
         }
-
-        private async Task ConsultaPytrendsAsync()
+        catch (Exception)
         {
+            HasError = true;
+            ErrorMessage = "Erro de Conexão, tente novamente mais tarde!";
             Show = false;
-            IsBusy = true;
-            HasError = false;
-
-            try
-            {
-                var pytrends = RestService.For<IRestApi>(EndPoints.BaseUrl);
-                var response = await pytrends.Request(_palavras);
-                Resultado = response;
-                Show = true;
-            }
-            catch (Exception ex)
-            {
-                HasError = true;
-                ErrorMessage = "Erro de Conexão, tente novamente mais tarde!";
-                Show = false;
-            }
-            finally
-                {
-                IsBusy = false;
-                }
-            }
-            finally
-            {
-                IsBusy = false;
-            }
         }
-
-        [RelayCommand]
-        private async Task PushAsyncGraficoConjunto()
+        finally
         {
-            if (Resultado != null)
-            {
-                var navigationParameter = new Dictionary<string, object>
+            IsBusy = false;
+        }
+    }
+
+
+    [RelayCommand]
+    private async Task PushAsyncGraficoConjunto()
+    {
+        if (Resultado != null)
+        {
+            var navigationParameter = new Dictionary<string, object>
                 {
                     { "Resultado", Resultado }
                 };
-                
-                await Shell.Current.GoToAsync(nameof(GraficoPage), navigationParameter);
-            }
-        }
 
-        [RelayCommand]
-        private async Task PushAsyncGraficoPalavra(string palavra)
+            await Shell.Current.GoToAsync(nameof(GraficoPage), navigationParameter);
+        }
+    }
+
+    [RelayCommand]
+    private async Task PushAsyncGraficoPalavra(string palavra)
+    {
+        if (Resultado != null && !string.IsNullOrEmpty(palavra))
         {
-            if (Resultado != null && !string.IsNullOrEmpty(palavra))
-            {
-                var navigationParameter = new Dictionary<string, object>
+            var navigationParameter = new Dictionary<string, object>
                 {
                     { "Resultado", Resultado },
                     { "Palavra", palavra }
                 };
-                
-                await Shell.Current.GoToAsync(nameof(GraficoPage), navigationParameter);
-            }
-        }
 
-        [RelayCommand]
-        private async Task TentarNovamente()
-        {
-            await ConsultaPytrendsAsync();
-        }
-
-        [RelayCommand]
-        private static async Task Voltar()
-        {
-            await Shell.Current.GoToAsync("..");
+            await Shell.Current.GoToAsync(nameof(GraficoPage), navigationParameter);
         }
     }
+
+    [RelayCommand]
+    private async Task TentarNovamente()
+    {
+        await ConsultaPytrendsAsync();
+    }
+
+    [RelayCommand]
+    private static async Task Voltar()
+    {
+        await Shell.Current.GoToAsync("..");
+    }
 }
+
