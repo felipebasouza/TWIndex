@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TwIndex.Pages.ResultadoPage"
              x:Name="page"
-             Title="ResultadoPage">
+             Title="Resultados">
     <Grid>
         <!-- Loading Indicator -->
         <ActivityIndicator IsRunning="{Binding IsBusy}"
@@ -49,9 +49,11 @@
                                FontSize="18" 
                                TextColor="Black" />
 
+
                         <BoxView Color="Gray" 
-                                HeightRequest="2" 
-                                WidthRequest="80" />
+                                            HeightRequest="2" 
+                                            WidthRequest="80"
+                                            HorizontalOptions="Start" />
 
                         <Label Text="ITW Médio" 
                                FontSize="12" 
@@ -63,15 +65,15 @@
                                Text="{Binding Resultado.DesempenhoAnualConjunto, StringFormat='{0:F2}'}" />
 
                         <Button Command="{Binding PushAsyncGraficoConjuntoCommand}" 
-                                BackgroundColor="White" 
-                                BorderWidth="2" 
-                                CornerRadius="25" 
-                                FontSize="12" 
-                                Padding="20,8"
-                                WidthRequest="120"
-                                HorizontalOptions="Start"
-                                TextColor="#280680" 
-                                Text="Ver Gráfico" />
+                              BackgroundColor="#280680" 
+                              TextColor="White"
+                              BorderWidth="0"
+                              CornerRadius="25" 
+                              FontSize="12" 
+                              Padding="20,8"
+                              WidthRequest="130"
+                              HorizontalOptions="End"
+                              Text="Ver Gráfico" /> 
                     </VerticalStackLayout>
                 </Frame>
 
@@ -97,7 +99,8 @@
 
                                     <BoxView Color="Gray" 
                                             HeightRequest="2" 
-                                            WidthRequest="80" />
+                                            WidthRequest="80"
+                                            HorizontalOptions="Start" />
 
                                     <Label Text="ITW" 
                                            FontSize="12" 
@@ -110,14 +113,14 @@
 
                                     <Button Command="{Binding Source={x:Reference page}, Path=BindingContext.PushAsyncGraficoPalavraCommand}" 
                                             CommandParameter="{Binding Key}"
-                                            BackgroundColor="White" 
-                                            BorderWidth="2" 
+                                            BackgroundColor="#280680" 
+                                            TextColor="White"
+                                            BorderWidth="0"
                                             CornerRadius="25" 
                                             FontSize="12" 
                                             Padding="20,8"
                                             WidthRequest="130"
                                             HorizontalOptions="End"
-                                            TextColor="#280680" 
                                             Text="Ver Gráfico" />
                                 </VerticalStackLayout>
                             </Frame>
