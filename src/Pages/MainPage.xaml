@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:mi="http://www.aathifmahir.com/dotnet/2022/maui/icons"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TwIndex.Pages.MainPage"
+             Shell.NavBarIsVisible="True">
+
+    <Shell.TitleView>
+        <Grid Padding="30,0" ColumnSpacing="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0"
+                   Text="TW-Index" 
+                   FontSize="20" 
+                   TextColor="White"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Start" />
+            
+            <ImageButton Grid.Column="1"
+                         HeightRequest="34" 
+                         WidthRequest="34"
+                         mi:MauiIcon.Value="{mi:Material Icon=Info}"
+                         BackgroundColor="#5e35b1"
+                         CornerRadius="17"
+                         Padding="7"
+                         Clicked="OnInfoClicked"
+                         VerticalOptions="Center"
+                         HorizontalOptions="End">
+                <ImageButton.Shadow>
+                    <Shadow Brush="Black"
+                            Offset="0,2"
+                            Radius="4"
+                            Opacity="0.3" />
+                </ImageButton.Shadow>
+            </ImageButton>
+
+        </Grid>
+    </Shell.TitleView>
+
+    <ScrollView>
+        <VerticalStackLayout BackgroundColor="White" Spacing="0">
+
+            <!-- Seção de Apresentação -->
+            <VerticalStackLayout Padding="20" Spacing="15">
+                <Label TextColor="Black" 
+                       HorizontalTextAlignment="Center" 
+                       FontSize="24" 
+                       FontAttributes="Bold"
+                       Text="Conheça o TW-Index" />
+
+                <BoxView Margin="0,5" 
+                         Color="Gray" 
+                         HeightRequest="1" 
+                         WidthRequest="100"
+                         HorizontalOptions="Center" />
+
+                <Label FontSize="16" 
+                       TextColor="#333333"
+                       HorizontalTextAlignment="Start" 
+                       LineHeight="1.4"
+                       Text="O TW-Index App é uma ferramenta gratuita da Universidade Federal de Sergipe que permite acompanhar a evolução do interesse por uma palavra-chave ao longo do tempo." />
+            </VerticalStackLayout>
+
+            <!-- Seção de Busca -->
+            <VerticalStackLayout Padding="20" Spacing="20">
+                <VerticalStackLayout Spacing="10">
+                    <Label HorizontalTextAlignment="Center" 
+                           FontSize="24" 
+                           FontAttributes="Bold"
+                           TextColor="Black" 
+                           Text="Iniciar Busca" />
+
+                    <BoxView Color="Gray" 
+                             HeightRequest="1" 
+                             WidthRequest="100"
+                             HorizontalOptions="Center" />
+                </VerticalStackLayout>
+
+                <Label TextColor="Black" 
+                       Text="Qual o Contexto da Busca?" 
+                       HorizontalTextAlignment="Center" 
+                       FontSize="18"
+                       FontAttributes="Bold" />
+
+                <HorizontalStackLayout Spacing="30" 
+                                      HorizontalOptions="Center"
+                                      Margin="10">
+                    <RadioButton x:Name="radioAcademico"
+                                 FontSize="16" 
+                                 Content="Acadêmico"
+                                 GroupName="Contexto"
+                                 CheckedChanged="OnRadioButtonCheckedChanged" />
+
+                    <RadioButton x:Name="radioEmpresarial"
+                                 FontSize="16" 
+                                 Content="Empresarial"
+                                 GroupName="Contexto"
+                                 CheckedChanged="OnRadioButtonCheckedChanged" />
+                </HorizontalStackLayout>
+
+                <Button x:Name="buttonNext" 
+                        Clicked="OnNextClicked"  
+                        Margin="40,20,40,20" 
+                        BackgroundColor="#280680" 
+                        TextColor="White" 
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        CornerRadius="8"
+                        HeightRequest="50"
+                        Text="Avançar"
+                        IsEnabled="False">
+                    <Button.Triggers>
+                        <DataTrigger TargetType="Button" 
+                                     Binding="{Binding Source={x:Reference buttonNext}, Path=IsEnabled}" 
+                                     Value="False">
+                            <Setter Property="Opacity" Value="0.5" />
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

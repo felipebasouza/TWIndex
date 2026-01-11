@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TwIndex.Pages.FormEmpresaPage"
+             Title="Informações sobre o Mercado">
+    <ScrollView>
+        <VerticalStackLayout Margin="15" Spacing="15">
+
+            <Entry Text="{Binding Segmento, Mode=TwoWay}" 
+                   Placeholder="Segmento de Mercado" 
+                   Keyboard="Text"
+                   PlaceholderColor="Gray" />
+
+            <Entry Text="{Binding Nome, Mode=TwoWay}" 
+                   Placeholder="Insira seu Nome" 
+                   Keyboard="Text"
+                   PlaceholderColor="Gray" />
+
+            <Entry Text="{Binding Cidade, Mode=TwoWay}" 
+                   Placeholder="Insira sua Cidade" 
+                   Keyboard="Text"
+                   PlaceholderColor="Gray" />
+
+            <Entry Text="{Binding Estado, Mode=TwoWay}" 
+                   Placeholder="Insira seu Estado" 
+                   Keyboard="Text"
+                   PlaceholderColor="Gray" />
+
+            <VerticalStackLayout Margin="0,10" 
+                                Spacing="15" 
+                                Padding="20">
+
+                <Label HorizontalOptions="Center" 
+                       Text="Insira a quantidade de palavras-chave:" 
+                       FontSize="16"
+                       TextColor="Black" />
+
+                <Label x:Name="stpLabel"
+                       Text="{Binding ValorStepper}" 
+                       FontSize="24" 
+                       FontAttributes="Bold" 
+                       TextColor="#280680" 
+                       HorizontalOptions="Center" />
+
+                <Stepper x:Name="stepper"
+                         Minimum="1" 
+                         Maximum="5" 
+                         Increment="1" 
+                         Value="{Binding ValorStepper, Mode=TwoWay}"
+                         ValueChanged="OnStepperValueChanged"
+                         HorizontalOptions="Center" />
+            </VerticalStackLayout>
+
+            <Button x:Name="btnAvancar"
+                    Margin="40,20,40,20" 
+                    Clicked="OnAvancarClicked"
+                    BackgroundColor="#280680" 
+                    TextColor="White" 
+                    FontSize="16"
+                    FontAttributes="Bold"
+                    CornerRadius="8"
+                    HeightRequest="50"
+                    Text="Avançar"
+                    IsEnabled="{Binding IsFormValid}">
+                <Button.Triggers>
+                    <DataTrigger TargetType="Button" 
+                                 Binding="{Binding IsFormValid}" 
+                                 Value="False">
+                        <Setter Property="Opacity" Value="0.5" />
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
