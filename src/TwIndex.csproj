@@ -40,7 +40,7 @@
 	<ItemGroup>
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
-		
+
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
 
@@ -55,6 +55,10 @@
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="10.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.0" />
 		<PackageReference Include="Refit" Version="9.0.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\TwIndex.Core\TwIndex.Core.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

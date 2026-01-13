@@ -1,13 +1,12 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Refit;
-using TwIndex.Models;
-using TwIndex.Pages;
-using TwIndex.Services;
+using TwIndex.Core.Models;
+using TwIndex.Core.Services;
 
-namespace TwIndex.ViewModels;
+namespace TwIndex.Core.ViewModels;
 
-public partial class ResultadoViewModel : ObservableObject
+public partial class ResultadoViewModel(INavigationService navigation) : ObservableObject
 {
     [ObservableProperty]
     private bool isBusy;
@@ -24,14 +23,12 @@ public partial class ResultadoViewModel : ObservableObject
     [ObservableProperty]
     private string errorMessage = string.Empty;
 
-    private readonly List<string> _palavras;
+    private List<string> _palavras = [];
+    private readonly INavigationService _navigation = navigation;
 
-    public ResultadoViewModel(List<string> palavras)
+    public void SetPalavras(List<string> palavras)
     {
-        // Filtra palavras vazias
         _palavras = [.. palavras.Where(p => !string.IsNullOrWhiteSpace(p))];
-
-        // Inicia a consulta
         _ = ConsultaPytrendsAsync();
     }
 
@@ -48,7 +45,7 @@ public partial class ResultadoViewModel : ObservableObject
             Resultado = response;
             Show = true;
         }
-        catch (Exception)
+        catch
         {
             HasError = true;
             ErrorMessage = "Erro de Conexão, tente novamente mais tarde!";
@@ -60,18 +57,17 @@ public partial class ResultadoViewModel : ObservableObject
         }
     }
 
-
     [RelayCommand]
     private async Task PushAsyncGraficoConjunto()
     {
         if (Resultado != null)
         {
             var navigationParameter = new Dictionary<string, object>
-                {
-                    { "Resultado", Resultado }
-                };
+            {
+                { "Resultado", Resultado }
+            };
 
-            await Shell.Current.GoToAsync(nameof(GraficoPage), navigationParameter);
+            await _navigation.GoToAsync("GraficoPage", navigationParameter);
         }
     }
 
@@ -81,12 +77,12 @@ public partial class ResultadoViewModel : ObservableObject
         if (Resultado != null && !string.IsNullOrEmpty(palavra))
         {
             var navigationParameter = new Dictionary<string, object>
-                {
-                    { "Resultado", Resultado },
-                    { "Palavra", palavra }
-                };
+            {
+                { "Resultado", Resultado },
+                { "Palavra", palavra }
+            };
 
-            await Shell.Current.GoToAsync(nameof(GraficoPage), navigationParameter);
+            await _navigation.GoToAsync("GraficoPage", navigationParameter);
         }
     }
 
@@ -97,9 +93,8 @@ public partial class ResultadoViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private static async Task Voltar()
+    private async Task Voltar()
     {
-        await Shell.Current.GoToAsync("..");
+        await _navigation.GoBackAsync();
     }
 }
-

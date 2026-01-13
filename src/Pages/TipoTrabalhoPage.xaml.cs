@@ -1,13 +1,17 @@
-using TwIndex.Models;
-using TWIndex.ViewModels;
+using TwIndex.Core.Models;
+using TwIndex.Core.Services;
+using TwIndex.Core.ViewModels;
 
 namespace TwIndex.Pages;
 
 public partial class TipoTrabalhoPage : ContentPage
 {
-    public TipoTrabalhoPage()
+    private readonly INavigationService _navigation;
+
+    public TipoTrabalhoPage(INavigationService navigation)
     {
         InitializeComponent();
+        _navigation = navigation;
         BindingContext = new TipoTrabalhoViewModel();
     }
 
@@ -15,14 +19,18 @@ public partial class TipoTrabalhoPage : ContentPage
     {
         if (e.CurrentSelection.Count > 0)
         {
-            var tipoSelecionado = e.CurrentSelection[0] as Tipo;
-            if (tipoSelecionado != null)
+            if (e.CurrentSelection[0] is Tipo tipoSelecionado)
             {
                 // Limpa a seleção
                 ((CollectionView)sender).SelectedItem = null;
 
-                // Navega
-                await Navigation.PushAsync(new FormTrabalhoPage(tipoSelecionado.Nome));
+                // Navega usando INavigationService
+                var parameters = new Dictionary<string, object>
+                {
+                    { "TipoTrabalho", tipoSelecionado.Nome }
+                };
+
+                await _navigation.GoToAsync(nameof(FormTrabalhoPage), parameters);
             }
         }
     }

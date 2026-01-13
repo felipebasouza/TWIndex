@@ -4,9 +4,10 @@ using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Painting;
 using SkiaSharp;
 using System.Collections.ObjectModel;
-using TwIndex.Models;
+using TwIndex.Core.Models;
 
-namespace TwIndex.ViewModels;
+namespace TwIndex.Core.ViewModels;
+
 
 public partial class GraficoViewModel : ObservableObject, IQueryAttributable
 {

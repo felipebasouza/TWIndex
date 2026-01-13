@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace TwIndex.ViewModels;
+namespace TwIndex.Core.ViewModels;
 
 public partial class FormTrabalhoViewModel : ObservableObject
 {

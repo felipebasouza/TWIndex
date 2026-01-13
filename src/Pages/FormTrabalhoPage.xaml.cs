@@ -1,17 +1,27 @@
-﻿using TwIndex.ViewModels;
+﻿using TwIndex.Core.Services;
+using TwIndex.Core.ViewModels;
+
 namespace TwIndex.Pages;
 
+[QueryProperty(nameof(TipoTrabalho), "TipoTrabalho")]
 public partial class FormTrabalhoPage : ContentPage
 {
-    private readonly FormTrabalhoViewModel _viewModel;
+    private FormTrabalhoViewModel? _viewModel;
+    private readonly INavigationService _navigation;
 
-    public FormTrabalhoPage(string tipoTrabalho)
+    public FormTrabalhoPage(INavigationService navigation)
     {
         InitializeComponent();
-        
-        _viewModel = new FormTrabalhoViewModel(tipoTrabalho);
-        BindingContext = _viewModel;
-        
+        _navigation = navigation;
+    }
+
+    public string TipoTrabalho
+    {
+        set
+        {
+            _viewModel = new FormTrabalhoViewModel(value);
+            BindingContext = _viewModel;
+        }
     }
 
     private void OnStepperValueChanged(object sender, ValueChangedEventArgs e)
@@ -21,11 +31,16 @@ public partial class FormTrabalhoPage : ContentPage
 
     private async void OnAvancarClicked(object sender, EventArgs e)
     {
-        
-        if (!_viewModel.IsValid())
+        if (_viewModel == null || !_viewModel.IsValid())
             return;
 
         int quantidadePalavras = (int)_viewModel.ValorStepper;
-        await Navigation.PushAsync(new FormPalavrasPage(quantidadePalavras));
+
+        var parameters = new Dictionary<string, object>
+        {
+            { "QuantidadePalavras", quantidadePalavras }
+        };
+
+        await _navigation.GoToAsync(nameof(FormPalavrasPage), parameters);
     }
 }

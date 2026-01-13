@@ -1,36 +1,43 @@
-using TwIndex.ViewModels;
+using TwIndex.Core.Services;
+using TwIndex.Core.ViewModels;
 
 namespace TwIndex.Pages;
 
+[QueryProperty(nameof(QuantidadePalavras), "QuantidadePalavras")]
 public partial class FormPalavrasPage : ContentPage
 {
     private FormPalavrasViewModel ViewModel => (FormPalavrasViewModel)BindingContext;
+    private readonly INavigationService _navigation;
 
-    public FormPalavrasPage(int quantidadePalavras)
+    public FormPalavrasPage(INavigationService navigation)
     {
         InitializeComponent();
+        _navigation = navigation;
+        BindingContext = new FormPalavrasViewModel();
+    }
 
-        var viewModel = new FormPalavrasViewModel(quantidadePalavras);
-        BindingContext = viewModel;
-
-        // Cria os Entry dinamicamente baseado na quantidade
-        CriarEntriesPalavras(quantidadePalavras);
-
-        // Monitora mudanças para habilitar/desabilitar botão
-        viewModel.PropertyChanged += (s, e) =>
+    public int QuantidadePalavras
+    {
+        set
         {
-            if (e.PropertyName?.StartsWith("Palavra") == true)
-            {
-                btnAvancar.IsEnabled = viewModel.IsValid();
-            }
-        };
+            ViewModel.SetQuantidadePalavras(value);
+            CriarEntriesPalavras(value);
+            btnAvancar.IsEnabled = ViewModel.IsValid();
 
-        // Estado inicial do botão
-        btnAvancar.IsEnabled = viewModel.IsValid();
+            ViewModel.PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName?.StartsWith("Palavra") == true)
+                {
+                    btnAvancar.IsEnabled = ViewModel.IsValid();
+                }
+            };
+        }
     }
 
     private void CriarEntriesPalavras(int quantidade)
     {
+        Panel.Children.Clear();
+
         for (int i = 1; i <= quantidade; i++)
         {
             var entry = new Entry
@@ -39,9 +46,7 @@ public partial class FormPalavrasPage : ContentPage
                 PlaceholderColor = Colors.Gray
             };
 
-            // Cria o binding para Palavra1, Palavra2, etc.
             entry.SetBinding(Entry.TextProperty, $"Palavra{i}");
-
             Panel.Children.Add(entry);
         }
     }
@@ -52,8 +57,11 @@ public partial class FormPalavrasPage : ContentPage
             return;
 
         var palavras = ViewModel.GetPalavras();
+        var parameters = new Dictionary<string, object>
+        {
+            { "Palavras", palavras }
+        };
 
-        // Navega para ResultadoPage
-        await Navigation.PushAsync(new ResultadoPage(palavras));
+        await _navigation.GoToAsync(nameof(ResultadoPage), parameters);
     }
 }

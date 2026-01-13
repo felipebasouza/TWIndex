@@ -1,15 +1,18 @@
+using TwIndex.Core.Services;
+using TwIndex.Core.ViewModels;
 
-using TwIndex.ViewModels;
 
 namespace TwIndex.Pages;
 
 public partial class FormEmpresaPage : ContentPage
 {
     private FormEmpresaViewModel ViewModel => (FormEmpresaViewModel)BindingContext;
+    private readonly INavigationService _navigation;
 
-    public FormEmpresaPage()
+    public FormEmpresaPage(INavigationService navigation)
     {
         InitializeComponent();
+        _navigation = navigation;
         BindingContext = new FormEmpresaViewModel();
 
         // Monitora mudanças nas propriedades para habilitar/desabilitar botão
@@ -38,7 +41,11 @@ public partial class FormEmpresaPage : ContentPage
 
         int quantidadePalavras = (int)ViewModel.ValorStepper;
 
-        await Navigation.PushAsync(new FormPalavrasPage(quantidadePalavras));
+        var parameters = new Dictionary<string, object>
+        {
+            { "QuantidadePalavras", quantidadePalavras }
+        };
 
+        await _navigation.GoToAsync(nameof(FormPalavrasPage), parameters);
     }
 }
