@@ -1,4 +1,4 @@
-using TwIndex.ViewModels;
+using TwIndex.Core.ViewModels;
 
 namespace TwIndex.Pages;
 

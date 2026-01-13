@@ -1,4 +1,4 @@
-﻿namespace TwIndex.Models
+﻿namespace TwIndex.Core.Models
 {
     public class Tipo
     {

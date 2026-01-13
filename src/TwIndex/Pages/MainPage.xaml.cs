@@ -1,14 +1,17 @@
-﻿namespace TwIndex.Pages
+﻿using TwIndex.Core.Services;
+
+namespace TwIndex.Pages
 {
     public partial class MainPage : ContentPage
     {
         private bool _isAcademic;
         private bool _isBusiness;
+        private readonly INavigationService _navigation;
 
-        public MainPage()
+        public MainPage(INavigationService navigation)
         {
             InitializeComponent();
-            
+            _navigation = navigation;
             buttonNext.IsEnabled = false;
         }
 
@@ -37,17 +40,17 @@
         {
             if (_isAcademic)
             {
-                await Navigation.PushAsync(new TipoTrabalhoPage());
+                await _navigation.GoToAsync(nameof(TipoTrabalhoPage));
             }
             else if (_isBusiness)
             {
-                await Navigation.PushAsync(new FormEmpresaPage());
+                await _navigation.GoToAsync(nameof(FormEmpresaPage));
             }
         }
 
         private async void OnInfoClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new Sobre());
+            await _navigation.GoToAsync(nameof(Sobre));
         }
     }
 }

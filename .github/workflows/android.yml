@@ -5,7 +5,35 @@ on:
   workflow_dispatch:
 
 jobs:
+  test-android:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Configurar .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.x.x'
+
+      - name: Instalar workload MAUI Android
+        run: dotnet workload restore
+
+      - name: Instalar Ruby e Fastlane
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+
+      - name: Instalar dependências Fastlane
+        working-directory: fastlane
+        run: bundle install
+
+      - name: Executar testes de unidade e lint
+        working-directory: fastlane
+        run: bundle exec fastlane android test
+
   build-android:
+    needs: test-android
     runs-on: ubuntu-latest
     steps:
       - name: Checkout código
@@ -20,10 +48,10 @@ jobs:
         run: dotnet workload restore
         
       - name: Restaurar dependências Android
-        run: dotnet restore src/TwIndex.csproj -p:TargetFramework=net10.0-android
+        run: dotnet restore src/TwIndex/TwIndex.csproj -p:TargetFramework=net10.0-android
         
       - name: Compilar projeto Android
-        run: dotnet publish src/TwIndex.csproj -f net10.0-android -c Release -o ./fastlane/output
+        run: dotnet publish src/TwIndex/TwIndex.csproj -f net10.0-android -c Release -o ./fastlane/output
         
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1

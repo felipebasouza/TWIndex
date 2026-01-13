@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:mi="http://www.aathifmahir.com/dotnet/2022/maui/icons"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TwIndex.Pages.MainPage"
              Shell.NavBarIsVisible="True">
@@ -18,23 +17,25 @@
                    VerticalOptions="Center"
                    HorizontalOptions="Start" />
             
-            <ImageButton Grid.Column="1"
-                         HeightRequest="34" 
-                         WidthRequest="34"
-                         mi:MauiIcon.Value="{mi:Material Icon=Info}"
-                         BackgroundColor="#5e35b1"
-                         CornerRadius="17"
-                         Padding="7"
-                         Clicked="OnInfoClicked"
-                         VerticalOptions="Center"
-                         HorizontalOptions="End">
-                <ImageButton.Shadow>
+            <Button Grid.Column="1"
+                    HeightRequest="34" 
+                    WidthRequest="34"
+                    Text="ℹ️"
+                    FontSize="20"
+                    BackgroundColor="#5e35b1"
+                    TextColor="White"
+                    CornerRadius="17"
+                    Padding="0"
+                    Clicked="OnInfoClicked"
+                    VerticalOptions="Center"
+                    HorizontalOptions="End">
+                <Button.Shadow>
                     <Shadow Brush="Black"
                             Offset="0,2"
                             Radius="4"
                             Opacity="0.3" />
-                </ImageButton.Shadow>
-            </ImageButton>
+                </Button.Shadow>
+            </Button>
 
         </Grid>
     </Shell.TitleView>

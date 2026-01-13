@@ -1,12 +1,7 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using System.Collections.ObjectModel;
-using TwIndex.Models;
-using TwIndex.Pages;
-using TwIndex.ViewModels;
+﻿using System.Collections.ObjectModel;
+using TwIndex.Core.Models;
 
-
-namespace TWIndex.ViewModels;
+namespace TwIndex.Core.ViewModels;
 
 public class TipoTrabalhoViewModel
 {

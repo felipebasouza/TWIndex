@@ -1,7 +1,7 @@
 ﻿using Refit;
-using TwIndex.Models;
+using TwIndex.Core.Models;
 
-namespace TwIndex.Services
+namespace TwIndex.Core.Services
 {
     public interface IRestApi
     {

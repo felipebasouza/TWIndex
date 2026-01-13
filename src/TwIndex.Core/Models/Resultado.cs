@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace TwIndex.Models
+namespace TwIndex.Core.Models
 {
     public class Resultado
     {
