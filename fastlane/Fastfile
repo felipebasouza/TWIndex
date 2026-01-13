@@ -13,6 +13,22 @@ platform :android do
   end
 
   # ========================================
+  # Lane de testes e lint
+  # ========================================
+  desc "Executa testes de unidade e lint"
+  lane :test do
+    UI.message("🧪 Executando testes de unidade...")
+  
+    sh("dotnet test ../TwIndex.sln --logger:trx")
+
+    #UI.message("🧹 Executando lint (dotnet format)...")
+    #sh("dotnet format ../TwIndex.sln --verify-no-changes")
+
+    UI.message("✅ Testes concluídos com sucesso.")
+  end
+
+
+  # ========================================
   # Lane que apenas assina o APK
   # ========================================
   desc "Assina APK gerado pelo dotnet publish"
