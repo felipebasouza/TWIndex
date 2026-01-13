@@ -5,6 +5,33 @@ on:
   workflow_dispatch:
 
 jobs:
+  test-android:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Configurar .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.x.x'
+
+      - name: Instalar workload MAUI Android
+        run: dotnet workload restore
+
+      - name: Instalar Ruby e Fastlane
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+
+      - name: Instalar dependências Fastlane
+        working-directory: fastlane
+        run: bundle install
+
+      - name: Executar testes de unidade e lint
+        working-directory: fastlane
+        run: bundle exec fastlane android test
+
   build-android:
     runs-on: ubuntu-latest
     steps:
