@@ -19,10 +19,10 @@ platform :android do
   lane :test do
     UI.message("🧪 Executando testes de unidade...")
   
-    sh("dotnet test ../TwIndex.sln --logger:trx")
+    sh("dotnet test ../TwIndex.slnx --logger:trx")
 
     #UI.message("🧹 Executando lint (dotnet format)...")
-    #sh("dotnet format ../TwIndex.sln --verify-no-changes")
+    #sh("dotnet format ../TwIndex.slnx --verify-no-changes")
 
     UI.message("✅ Testes concluídos com sucesso.")
   end
