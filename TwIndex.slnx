@@ -1,7 +1,7 @@
 <Solution>
-  <Project Path="src/TwIndex.csproj">
+  <Project Path="src/TwIndex/TwIndex.csproj">
     <Deploy Solution="Debug|*" />
   </Project>
-  <Project Path="TwIndex.Core/TwIndex.Core.csproj" Id="1a7e6d73-d9c0-4ae6-9e09-5cc5ba7d07e7" />
-  <Project Path="TwIndex.Tests/TwIndex.Tests.csproj" Id="9d544732-e7f4-4c5b-86f1-1113835e8cc5" />
+  <Project Path="src/TwIndex.Core/TwIndex.Core.csproj" Id="1a7e6d73-d9c0-4ae6-9e09-5cc5ba7d07e7" />
+  <Project Path="src/TwIndex.Tests/TwIndex.Tests.csproj" Id="9d544732-e7f4-4c5b-86f1-1113835e8cc5" />
 </Solution>
