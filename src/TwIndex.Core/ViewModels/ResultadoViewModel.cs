@@ -40,9 +40,14 @@ public partial class ResultadoViewModel(INavigationService navigation) : Observa
 
         try
         {
-            var pytrends = RestService.For<IRestApi>(EndPoints.BaseUrl);
-            var response = await pytrends.Request(_palavras);
-            Resultado = response;
+            await Task.Delay(3000); // Simula tempo de requisição
+
+            //var pytrends = RestService.For<IRestApi>(EndPoints.BaseUrl);
+            //var response = await pytrends.Request(_palavras);
+            //Resultado = response;
+
+            Resultado = ResultadoSimulator.CriarResultadoSimulado(_palavras);
+
             Show = true;
         }
         catch
