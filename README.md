@@ -4,8 +4,13 @@ O **TW-Index** é uma ferramenta de prospecção tecnológica baseada na técnic
 O objetivo é antecipar tendências, identificar oportunidades e mapear possíveis ameaças em tecnologias emergentes.
 
 A aplicação permite monitorar o interesse por palavras-chave relacionadas a uma tecnologia ou pesquisa, realizando consultas customizadas ao Google Trends™ para coletar dados de volume de buscas por região e período.  
-Esses dados são processados para gerar o **Índice ITW**, uma métrica normalizada de 0 a 100 que representa o interesse relativo por determinado termo.  
-Quanto maior o valor, maior o interesse na região analisada. 
+Esses dados são processados para gerar o **Índice ITW**, uma métrica normalizada de 0 a 100 que representa o interesse relativo por determinado termo. 
+
+---
+
+<p align="center">
+  <img src=".github/images/tw-mobile.png" width="500" />
+</p>
 
 ---
 
@@ -13,7 +18,7 @@ Quanto maior o valor, maior o interesse na região analisada.
 
 Apoiar decisões estratégicas por meio de indicadores reais de interesse tecnológico, aplicáveis a contextos acadêmicos e empresariais.
 
----
+
 
 ## Funcionalidades
 
@@ -46,7 +51,6 @@ Em 2020, durante o Programa Institucional de Bolsas de Iniciação em Desenvolvi
 - MVVM  
 - CI/CD com Fastlane e Github Actions
 
----
 
 ## Pipeline de CI/CD
 
@@ -59,8 +63,6 @@ O projeto possui processo de CI/CD totalmente automatizado:
 - Distribuição interna automatizada  
 
 O pipeline é orquestrado pelo Github Actions e utiliza o Fastlane para automação de build e entrega mobile.
-
----
 
 ## 🚀 Como rodar o projeto
 
@@ -99,17 +101,6 @@ Android Emulator
 dotnet build
 dotnet run
 ```
-
-## 🏗️ Arquitetura
-
-O projeto utiliza o padrão **MVVM**, separando as responsabilidades entre:
-
-- **View** — Responsável pela interface com o usuário.
-- **ViewModel** — Gerencia o estado e a lógica de apresentação.
-- **Model** — Representa os dados e regras de negócio.
-
-A camada de **Serviços** é responsável pelo consumo, tratamento e normalização dos dados externos.
-
 
 ## Licença
 
