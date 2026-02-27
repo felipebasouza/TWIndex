@@ -37,9 +37,9 @@ Este repositório contempla apenas a aplicação mobile. O backend, por motivos 
 
 ## Contexto e Validação
 
-A primeira versão web do TW-Index foi desenvolvida por [Aragão 2019]([https://link.com](https://ri.ufs.br/handle/riufs/12303))
+A primeira versão web do TW-Index foi desenvolvida por [Aragão (2019)](https://ri.ufs.br/handle/riufs/12303).
 
-Para validar a ferramenta [Moreno 2020]([https://ri.ufs.br/handle/riufs/12303]) apresentam um estudo de caso com patentes da Universidade Federal de Sergipe (UFS) depositadas entre 1998 e 2014. 
+Para validar a ferramenta, [Moreno et al. (2020)](https://ri.ufs.br/handle/riufs/12303) apresentam um estudo de caso com patentes da Universidade Federal de Sergipe (UFS), depositadas entre 1998 e 2014.
 
 Em 2020, durante o Programa Institucional de Bolsas de Iniciação em Desenvolvimento Tecnológico e Inovação (PIBITI) foi desenvolvimento este projeto.
 
