@@ -104,8 +104,6 @@ dotnet run
 
 ## Licença
 
-Este projeto é distribuído sob a licença MIT.
-Consulte o arquivo LICENSE para mais detalhes.
-
+Este projeto é distribuído sob a licença MIT. Consulte o arquivo `LICENSE` para mais detalhes.
 
 
